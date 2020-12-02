@@ -1,4 +1,15 @@
-# README
+# furima-29105 README
+
+# Contents
+  アプリケーション内で個人同士の物品売買ができる
+
+# Feature
+  物品一覧で写真や金額を一眼で確認でき、簡単に比較しながら購入できる
+  [実装内容]               [実装理由]     
+  * アカウント登録機能       * アプリケーションを理由する毎に情報を入力することは使用者にとって不便な為
+  * 商品登録機能            * 出品した後に商品情報(紹介や在庫状況等）を更新できる必要がある為
+  * 購入記録機能            * いつ誰が何を購入したか管理する必要がある為
+
 
 This README would normally document whatever steps are necessary to get the
 application up and running.
