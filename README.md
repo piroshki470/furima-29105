@@ -39,15 +39,14 @@ Things you may want to cover:
 ## usersテーブル
 | Column                | Type     | Option      |
 | ----------------------| ---------|-------------|
-|  user_id              | integer  | null: false |
 |  nickname             | string   | null: false |
 |  email                | string   | null: false |
-|  password             | string   | null: false |
+|  encrypted_password   | string   | null: false |
 |  family_name          | string   | null: false |
 |  first_name           | string   | null: false |
 |  family_name_kana     | string   | null: false |
 |  first_name_kana      | string   | null: false |
-|  birth_day            | string   | null: false |
+|  birth_day            | date     | null: false |
 
 
 ### Association
@@ -57,46 +56,45 @@ Things you may want to cover:
 ## itemsテーブル
 | Column       | Type      | Option                        |
 |--------------|---------- |-------------------------------|
-|  item_id     | reference | null :false, foreign_key :true|
-|  image       | string    | null :false                   |
-|  item_name   | text      | null :false                   |
+|  item_id     | integer   | null :false, foreign_key :true|
+|  item_name   | string    | null :false                   |
 |  introduction| text      | null :false                   |
 |  price       | integer   | null :false                   |
-|  category    | string    | null :false                   |
-|  status      | string    | null :false                   |
-|  charge      | string    | null :true                    |
+|  category    | integer   | null :false                   |
+|  status      | integer   | null :false                   |
+|  charge      | integer   | null :true                    |
 |  profit      | integer   | null :true                    |
-|  prefecture  | string    | null :false                   |
-|  ship_date   | string    | null :false                   |
+|  prefecture  | integer   | null :false                   |
+|  ship_date   | integer   | null :false                   |
 
 ### Association
-- belongs_to :users
-- has_one :buy_records
+- belongs_to :user
+- has_one :buy_record
 
 ## buy_recordテーブル
 | Column       | Type      | Option                         |
 | -------------|-----------|--------------------------------|
-| buy_date     | string    | null :false
-| user_id      | reference | null :false, foreign_key :true |
-| item_im      | reference | null :false, foreign_key :true |
+| buy_date     | string    | null :false                    |
+| item_id      | integer   | null :false, foreign_key :true |
 
 ### Association
-- has_one :addresses
-- belongs_to :users
-- belongs_to :items
+- has_one :address
+- belongs_to :user
+- belongs_to :item
 
 ## addressesテーブル
 | Column         | Type      | Option       |
 |----------------|-----------|--------------|
-| post_cord      | integer   | null :false  |
-| prefecture     | string    | null :false  |
+| buy_record_id  | integer   | null:false   |
+| post_cord      | string    | null :false  |
+| prefecture     | integer   | null :false  |
 | municipality   | text      | null :false  |
 | address_number | text      | null :false  |
 | building       | text      | null :false  |
-| phone_number   | integer   | null :false  |
+| phone_number   | string    | null :false  |
 
 ### Association
-- belongs_to :buy_records
+- belongs_to :buy_record
 
 
 
