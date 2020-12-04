@@ -54,28 +54,29 @@ Things you may want to cover:
 - has_many :buy_records
 
 ## itemsテーブル
-| Column       | Type      | Option                        |
-|--------------|---------- |-------------------------------|
-|  item_id     | integer   | null :false, foreign_key :true|
-|  item_name   | string    | null :false                   |
-|  introduction| text      | null :false                   |
-|  price       | integer   | null :false                   |
-|  category    | integer   | null :false                   |
-|  status      | integer   | null :false                   |
-|  charge      | integer   | null :true                    |
-|  profit      | integer   | null :true                    |
-|  prefecture  | integer   | null :false                   |
-|  ship_date   | integer   | null :false                   |
+| Column         | Type      | Option                        |
+|----------------|---------- |-------------------------------|
+|  user          | reference | null :false, foreign_key :true|
+|  name          | string    | null :false                   |
+|  introduction  | text      | null :false                   |
+|  price         | integer   | null :false                   |
+|  category_id   | integer   | null :false                   |
+|  status_id     | integer   | null :false                   |
+|  charge_id     | integer   | null :true                    |
+|  profit        | integer   | null :true                    |
+|  prefecture_id | integer   | null :false                   |
+|  ship_date_id  | integer   | null :false                   |
 
 ### Association
 - belongs_to :user
 - has_one :buy_record
 
-## buy_recordテーブル
+## buy_recordsテーブル
 | Column       | Type      | Option                         |
 | -------------|-----------|--------------------------------|
+| user         | reference | null :false, foreign_key :true |
+| item         | reference | null :false, foreign_key :true |
 | buy_date     | string    | null :false                    |
-| item_id      | integer   | null :false, foreign_key :true |
 
 ### Association
 - has_one :address
@@ -83,15 +84,15 @@ Things you may want to cover:
 - belongs_to :item
 
 ## addressesテーブル
-| Column         | Type      | Option       |
-|----------------|-----------|--------------|
-| buy_record_id  | integer   | null:false   |
-| post_cord      | string    | null :false  |
-| prefecture     | integer   | null :false  |
-| municipality   | text      | null :false  |
-| address_number | text      | null :false  |
-| building       | text      | null :false  |
-| phone_number   | string    | null :false  |
+| Column         | Type      | Option                         |
+|----------------|-----------|--------------------------------|
+| buy_record     | reference | null :false, foreign_key :true |
+| post_cord      | string    | null :false                    |
+| prefecture_id  | integer   | null :false                    |
+| municipality   | string    | null :false                    |
+| address_number | string    | null :false                    |
+| building       | string    |                                |
+| phone_number   | string    | null :false                    |
 
 ### Association
 - belongs_to :buy_record
