@@ -56,14 +56,13 @@ Things you may want to cover:
 ## itemsテーブル
 | Column         | Type      | Option                        |
 |----------------|---------- |-------------------------------|
-|  user          | reference | null :false, foreign_key :true|
+|  user          | references| null :false, foreign_key :true|
 |  name          | string    | null :false                   |
 |  introduction  | text      | null :false                   |
 |  price         | integer   | null :false                   |
 |  category_id   | integer   | null :false                   |
 |  status_id     | integer   | null :false                   |
 |  charge_id     | integer   | null :true                    |
-|  profit        | integer   | null :true                    |
 |  prefecture_id | integer   | null :false                   |
 |  ship_date_id  | integer   | null :false                   |
 
@@ -74,9 +73,8 @@ Things you may want to cover:
 ## buy_recordsテーブル
 | Column       | Type      | Option                         |
 | -------------|-----------|--------------------------------|
-| user         | reference | null :false, foreign_key :true |
-| item         | reference | null :false, foreign_key :true |
-| buy_date     | string    | null :false                    |
+| user         | references| null :false, foreign_key :true |
+| item         | references| null :false, foreign_key :true |
 
 ### Association
 - has_one :address
@@ -86,7 +84,7 @@ Things you may want to cover:
 ## addressesテーブル
 | Column         | Type      | Option                         |
 |----------------|-----------|--------------------------------|
-| buy_record     | reference | null :false, foreign_key :true |
+| buy_record     | references| null :false, foreign_key :true |
 | post_cord      | string    | null :false                    |
 | prefecture_id  | integer   | null :false                    |
 | municipality   | string    | null :false                    |
