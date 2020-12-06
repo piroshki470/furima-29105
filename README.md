@@ -34,6 +34,7 @@ Things you may want to cover:
 
 * ...
 
+# テーブル設計
 
 ## usersテーブル
 | Column                | Type     | Option      |
@@ -46,6 +47,7 @@ Things you may want to cover:
 |  family_name_kana     | string   | null: false |
 |  first_name_kana      | string   | null: false |
 |  birth_day            | date     | null: false |
+
 
 ### Association
 - has_many :items
@@ -92,5 +94,6 @@ Things you may want to cover:
 
 ### Association
 - belongs_to :buy_record
+
 
 
