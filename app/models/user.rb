@@ -5,17 +5,23 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
     VALID_PASSWORD_REGEX =/\A(?=.*?[a-z])(?=.*?\d)[a-z\d]{6,50}+\z/i
-    validates :password, presence: true, length: { minimum: 6 } ,format: { with: VALID_PASSWORD_REGEX }
-
     VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
-    validates :email, presence: true ,uniqueness: { case_sensitive: true }, format: { with: VALID_EMAIL_REGEX }
 
-    validates :nickname,:birth_day,:password_confirmation,    presence: true
-    validates :family_name,                                   presence: true, format: {with: /\A[ぁ-んァ-ン一-龥]/ } 
-    validates :first_name,                                    presence: true, format: {with: /\A[ぁ-んァ-ン一-龥]/ } 
-    validates :family_name_kana,                              presence: true, format: {with: /\A[ァ-ヶー－]+\z/ } 
-    validates :first_name_kana,                               presence: true, format: {with: /\A[ァ-ヶー－]+\z/ } 
-
+    with_options presence: true do
+      validates :password, length: { minimum: 6 } ,format: { with: VALID_PASSWORD_REGEX }
+      validates :email, uniqueness: { case_sensitive: true }, format: { with: VALID_EMAIL_REGEX }
+      validates :nickname
+      validates :password_confirmation
+      validates :birth_day
+      with_options format: {with: /\A[ぁ-んァ-ン一-龥]/ } do
+        validates :family_name
+        validates :first_name
+      end
+      with_options format: {with: /\A[ァ-ヶー－]+\z/ } do
+        validates :family_name_kana
+        validates :first_name_kana
+      end
+    end
 end
 
 
