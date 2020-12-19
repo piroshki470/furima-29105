@@ -1,17 +1,4 @@
-<!DOCTYPE html>
-<html>
-
-<head>
-  <title>Furima</title>
-  <%= csrf_meta_tags %>
-  <%= csp_meta_tag %>
-  <script type="text/javascript" src="https://js.pay.jp/v1/"></script>
-  <%= stylesheet_link_tag 'application', media: 'all'%>
-  <%= javascript_pack_tag 'application' %>
-</head>
-
-<body>
-<%= render "devise/shared/header" %>
+<%= render "shared/header" %>
 <div class='main'>
 
   <%# 画面上部の「人生を変えるフリマアプリ」帯部分 %>
@@ -197,8 +184,4 @@
   <span class='purchase-btn-text'>出品する</span>
   <%= image_tag 'icon_camera.png' , size: '185x50' ,class: "purchase-btn-icon" %>
 <% end %>
-<%= render "devise/shared/footer" %>
-  <%= yield %>
-</body>
-
-</html>
+<%= render "shared/footer" %>
