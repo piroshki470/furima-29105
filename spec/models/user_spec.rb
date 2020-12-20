@@ -40,6 +40,16 @@ describe User do
         @user.valid?
         expect(@user.errors.full_messages).to include("Password can't be blank") 
       end
+      it "paswrodが数字のみでは登録できない" do
+        @user.password = "000000"
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Password is invalid") 
+      end
+      it "paswrodが英字のみでは登録できない" do
+        @user.password = "tttttt"
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Password is invalid") 
+      end
       it "passwordが存在してもpaswrod_confirmationが空だと登録できない" do
         @user.password_confirmation = ""
         @user.valid?
