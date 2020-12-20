@@ -23,10 +23,15 @@ describe User do
         @user.valid?
         expect(@user.errors.full_messages).to include("Nickname can't be blank")
       end
-      it "email(@含む）が空だと登録できない" do
+      it "emailが空だと登録できない" do
       @user.email = ""
       @user.valid?
       expect(@user.errors.full_messages).to include("Email can't be blank")
+      end
+      it "emailに@が含まれないと登録できない" do
+        @user.email = "terai"
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Email is invalid")
       end
       it "重複したemailが存在する場合登録できない" do
         @user.save
