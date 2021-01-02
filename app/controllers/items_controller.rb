@@ -1,15 +1,20 @@
 class ItemsController < ApplicationController
   before_action :move_to_signed_in, except: [:index]
   def index
-    @items = Item.all
+    @item = Item.all
   end
 
   def new
-    @items = Item.new
+    @item = Item.new
   end
 
   def create
-    Item.create(item_params)
+    @item = Item.new(item_params)
+    unless @item.valid?
+      render :new and return
+    end
+    @item.save
+    redirect_to root_path
   end
 
   private
@@ -20,10 +25,7 @@ class ItemsController < ApplicationController
   end
 
   def item_params
-    params.require(:item).permit(:name, :image, :introduction)
+    params.require(:item).permit( :name, :image, :introduction, :price, :category_id, :status_id, :charge_id, :prefecture_id, :ship_date_id).merge(user_id: current_user.id)
   end
 
-  def message_params
-    params.require(:image).permit(:content, :image).merge(item_id: current_item.id)
-  end
 end
