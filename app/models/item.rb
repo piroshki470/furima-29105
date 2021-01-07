@@ -15,11 +15,16 @@ class Item < ApplicationRecord
     validates :image
     validates :name
     validates :introduction
-    validates :price            numericality: true , length: {in:300..9999999},
+    validates :price,           numericality:{ only_integer: true, greater_than: 300, less_than: 10000000 }
     validates :category_id,     numericality:{ other_than: 1 }
     validates :status_id,       numericality:{ other_than: 1 }
     validates :charge_id,       numericality:{ other_than: 1 }
     validates :prefecture_id,   numericality:{ other_than: 1 }
     validates :ship_date_id,    numericality:{ other_than: 1 }
+
+
+
   end
+
+
 end
