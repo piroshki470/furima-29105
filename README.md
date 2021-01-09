@@ -56,7 +56,6 @@ Things you may want to cover:
 |----------------|---------- |-------------------------------|
 |  user          | references| null :false, foreign_key :true|
 |  name          | string    | null :false                   |
-|  image         | string    | null :false
 |  introduction  | text      | null :false                   |
 |  price         | integer   | null :false                   |
 |  category_id   | integer   | null :false                   |
