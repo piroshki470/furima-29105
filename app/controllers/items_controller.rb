@@ -1,11 +1,20 @@
 class ItemsController < ApplicationController
+<<<<<<< Updated upstream
   before_action :authenticate_user!
+=======
+  before_action :authenticate_user!, except: [:index,:show]
+  before_action :set_item, only: [:show]
+
+>>>>>>> Stashed changes
   def index
     # @item = Item.all
   end
 
   def new
     @item = Item.new
+  end
+
+  def show
   end
 
   def create
@@ -17,10 +26,19 @@ class ItemsController < ApplicationController
     end
   end
 
+  def destroy
+      @item = Item.find(params[:id])
+      @item.destroy
+      redirect_to root_path
+  end
+
   private
 
   def item_params
     params.require(:item).permit( :name, :image, :introduction, :price, :category_id, :status_id, :charge_id, :prefecture_id, :ship_date_id).merge(user_id: current_user.id)
   end
 
+  def set_item
+    @item = Item.find(params[:id])
+  end
 end
