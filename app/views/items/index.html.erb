@@ -133,6 +133,7 @@
         <% if @items.any? %>
         <% @items.each do |item|%>
         <div class='item-img-content'>
+         <%= link_to "商品詳細" , item_path(item.id),method: :get %>
           <%= image_tag item.image, class: "item-img" %>
 
           <%# 商品が売れていればsold outを表示しましょう %>
