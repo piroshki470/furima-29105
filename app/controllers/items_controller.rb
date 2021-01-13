@@ -1,13 +1,9 @@
 class ItemsController < ApplicationController
-<<<<<<< Updated upstream
-  before_action :authenticate_user!
-=======
   before_action :authenticate_user!, except: [:index,:show]
   before_action :set_item, only: [:show]
 
->>>>>>> Stashed changes
   def index
-    # @item = Item.all
+    @items = Item.all
   end
 
   def new
