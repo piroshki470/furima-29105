@@ -24,6 +24,11 @@ class ItemsController < ApplicationController
 
 
    def edit
+    if current_user.id == @item.user_id
+       edit_item_path(@item.id)
+    else
+       redirect_to root_path
+    end
    end
 
    def update
