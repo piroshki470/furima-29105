@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_27_123653) do
+ActiveRecord::Schema.define(version: 2021_01_31_131924) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "name", null: false
@@ -33,8 +33,30 @@ ActiveRecord::Schema.define(version: 2020_12_27_123653) do
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
+  create_table "addresses", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+    t.bigint "buy_record_id", null: false
+    t.string "post_cord", null: false
+    t.string "municipality", null: false
+    t.string "address_number", null: false
+    t.string "building", null: false
+    t.string "phone_number", null: false
+    t.integer "prefecture_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["buy_record_id"], name: "index_addresses_on_buy_record_id"
+  end
+
+  create_table "buy_records", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "item_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["item_id"], name: "index_buy_records_on_item_id"
+    t.index ["user_id"], name: "index_buy_records_on_user_id"
+  end
+
   create_table "items", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
-    t.bigint "user_id"
+    t.bigint "user_id", null: false
     t.string "name", null: false
     t.text "introduction", null: false
     t.integer "price", null: false
@@ -45,7 +67,6 @@ ActiveRecord::Schema.define(version: 2020_12_27_123653) do
     t.integer "ship_date_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "image"
     t.index ["user_id"], name: "index_items_on_user_id"
   end
 
@@ -68,4 +89,8 @@ ActiveRecord::Schema.define(version: 2020_12_27_123653) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "addresses", "buy_records"
+  add_foreign_key "buy_records", "items"
+  add_foreign_key "buy_records", "users"
+  add_foreign_key "items", "users"
 end
