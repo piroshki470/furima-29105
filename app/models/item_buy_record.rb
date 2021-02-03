@@ -1,20 +1,19 @@
 class ItemBuyRecord
 
   include ActiveModel::Model
-  attr_accessor :password,:email,:nickname,:password_confirmation,:birth_day,:family_name,:first_name,:image,:name,:introduction,:price,:category_id,:status_id.:charge_id,:prefecture_id,:ship_date_id,:post_cord,:prefecture_id,:municipality,:address_number,:building,:phone_number
+  attr_accessor :password,:email,:nickname,:password_confirmation,:birth_day,:family_name,:first_name,:image,:name,:introduction,:price,:category_id,:status_id,:charge_id,:prefecture_id,:ship_date_id,:post_cord,:prefecture_id,:municipality,:address_number,:building,:phone_number
 
-  VALID_PRICE_REGEX =  /^[0-9]+$/
-  VALID_PASSWORD_REGEX =/\A(?=.*?[a-z])(?=.*?\d)[a-z\d]{6,50}+\z/i
-  VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
+  
 
   with_options presence: true do
+    #購入記録-送付先
     validates :post_cord,format: { with: /\A[0-9]{3}-[0-9]{4}\z/, message: "is invalid. Include hyphen(-)" }
     validates :municipality
     validates :address_number
     validates :building
     validates :phone_number
     validates :prefecture_id,numericality:{ other_than: 1 }
-
+    #商品登録
     validates :image
     validates :name
     validates :introduction
@@ -26,9 +25,9 @@ class ItemBuyRecord
       validates :prefecture_id
       validates :ship_date_id
      end
+    #user登録
+    validates :password, length: { minimum: 6 } ,format: {with: /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i}
 
-    validates :password, length: { minimum: 6 } ,format: { with: VALID_PASSWORD_REGEX }
-    validates :email, uniqueness: { case_sensitive: true }, format: { with: VALID_EMAIL_REGEX }
     validates :nickname
     validates :password_confirmation
     validates :birth_day

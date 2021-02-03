@@ -10,7 +10,7 @@ class Item < ApplicationRecord
   has_one                :buy_record
 
  
-
+  VALID_PRICE_REGEX =  /^[0-9]+$/
  
 
 
